@@ -1,7 +1,7 @@
 Qt.include("Czas.js")
 
 function getDatabase(){
-    return openDatabaseSync("Zeegaree", "1.0", "zeegaree", 1000000);
+    return openDatabaseSync("Zeegaree-devel", "1.0", "zeegaree-devel", 1000000);
 }
 
 /*============== CHECKING DB VERSION ===================*/
