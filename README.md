@@ -7,7 +7,7 @@ Stopwatch, Timer and Time Management
 Zeegaree was developed to work with desktop version of Ubuntu Unity in mind but it also should work on other Linux distros.
 
 ## Dependencies
-**Zeegaree Lite needs few packages in order to work properly.**
+**Zeegaree needs few packages in order to work properly.**
 These are:
 - libqt4-sql-sqlite
 - python-pyside
