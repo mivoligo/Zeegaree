@@ -50,7 +50,7 @@ def activate_if_already_running(app_id):
     except dbus.exceptions.DBusException:
         return False
     else:
-        print "A running process was found. Activating it."
+        print("A running process was found. Activating it.")
         activate()
         return True
     finally:
