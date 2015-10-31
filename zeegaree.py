@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from gi.repository import Unity, Notify
+from gi.repository import Notify
 from PySide import QtCore, QtGui, QtDeclarative
 import subprocess
 import os
@@ -9,11 +9,16 @@ import datetime
 import dbus.service
 from dbus.mainloop.glib import DBusGMainLoop
 
-
+try:
+    from gi.repository import Unity
+    LAUNCHER = Unity.LauncherEntry.get_for_desktop_id("zeegaree.desktop")
+except ImportError:
+    class NullLauncher:
+        def set_property(self, prop_name, enabled): pass
+    LAUNCHER = NullLauncher()
 
 NOTIFICATION_ICON = os.path.join(os.path.dirname(__file__), "./images/z_128.png")
 TRAY_ICON = os.path.join(os.path.dirname(__file__), "./images/mono_color_32.png")
-UNITY_LAUNCHER = Unity.LauncherEntry.get_for_desktop_id("zeegaree.desktop")
 HOME = os.path.expanduser("~")
 
 
@@ -85,24 +90,24 @@ class Launcher(QtCore.QObject):
     @QtCore.Slot(str)
     def setUrgent(self, value):
         """ Setting urgent state of icon in Unity launcher """
-        UNITY_LAUNCHER.set_property("urgent", value) 
+        LAUNCHER.set_property("urgent", value)
 
     
     @QtCore.Slot(int, str)
     
     def getPomodoroCount(self, value, booleen):
         """ Display number of minutes of pomodoro in Unity Launcher """
-        UNITY_LAUNCHER.set_property("count", value)
-        UNITY_LAUNCHER.set_property("count_visible", booleen)
+        LAUNCHER.set_property("count", value)
+        LAUNCHER.set_property("count_visible", booleen)
     
     @QtCore.Slot(float)
     def getTimerProgress(self, value):
         """ Display timer progress """
-        UNITY_LAUNCHER.set_property("progress", value)
+        LAUNCHER.set_property("progress", value)
         if value > 0:
-            UNITY_LAUNCHER.set_property("progress_visible", True)
+            LAUNCHER.set_property("progress_visible", True)
         else:
-            UNITY_LAUNCHER.set_property("progress_visible", False)
+            LAUNCHER.set_property("progress_visible", False)
 
 
 class SaveClass(QtGui.QMainWindow):
