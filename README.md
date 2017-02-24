@@ -13,6 +13,7 @@ These are:
 - python-pyside
 - gir1.2-unity
 - gir1.2-notify
+- python-dbus
 - maybe something more, let me know
 
 ## How to run it?
